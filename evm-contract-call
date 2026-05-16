@@ -33,7 +33,7 @@
 const
   _libcrash =
   require(
-    'crash-js');
+    "crash-js");
 /* global
      _argv_get */
 const
@@ -111,7 +111,7 @@ function
        app_name:
          writable */
   app_name =
-    "evm-chains-info.js";
+    "evm-contract-call.js";
   /* global
        app_opts:
          writable */
@@ -539,7 +539,9 @@ function
 
 _global_variables();
 if ( _cmdline_check(
-       "evm-chains-info.js") == true ) {
+       "evm-contract-call.js") == true ||
+     _cmdline_check(
+            "evm-contract-call") == true ) {
   _cmdline_parse();
 }
 else{
