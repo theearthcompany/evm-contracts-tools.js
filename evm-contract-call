@@ -210,7 +210,10 @@ function
     call_date =
       _get_date_human();
   }
-  _wallet_overrides_set();
+  if ( wallet_name == "" ) {
+    wallet_name =
+      "default";
+  }
   if ( index_retrieve == "" ) {
     index_retrieve =
       "n";
@@ -261,6 +264,10 @@ function
       }
     }
   }
+  _wallet_overrides_set(
+    "evm-wallet",
+    wallet_name,
+    call_auth);
 }
 
 function
