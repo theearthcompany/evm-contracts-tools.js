@@ -242,7 +242,6 @@ function
     "";
 }
 
-
 function 
   _overrides_set() {
   if ( call_date == "" ) {
@@ -260,18 +259,6 @@ function
   if ( retries_max == "" ) {
     retries_max =
       "300";
-  }
-  if ( target_networks == "" ||
-       target_networks == [] ) {
-    // to be auto-detected
-    target_networks = [
-      "1"
-    ];
-  }
-  if ( target_network == "" ) {
-    // to be auto-detected
-    target_network =
-      "1";
   }
   if ( rpc_selection == "" ) {
     rpc_selection =
