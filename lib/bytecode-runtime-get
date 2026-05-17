@@ -75,7 +75,7 @@ const
 const
   _evm_wallet_module =
     require(
-      "evm-wallet");
+      "evm-wallet.js");
 /* global
      _provider_get */
 const
