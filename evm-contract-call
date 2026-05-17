@@ -34,6 +34,9 @@
      call_auth:
        writable */
 /* global
+     call_timeout:
+       writable */
+/* global
      msg_value:
        writable */
 /* global
@@ -97,6 +100,11 @@ const
   _libevm_contract_call_module =
     require(
       "libevm-contract-call");
+/* global
+     _artifact_local_auto_detect */
+const
+  _artifact_local_auto_detect =
+    _libevm_contract_call_module._artifact_local_auto_detect;
 /* global
      _default_artifact_path_get */
 const
