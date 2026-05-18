@@ -43,6 +43,9 @@
      target_network:
        writable */
 /* global
+     target_networks:
+       writable */
+/* global
      api_key:
        writable */
 /* global
