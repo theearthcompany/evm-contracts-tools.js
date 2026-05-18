@@ -133,6 +133,11 @@ const
   _default_artifact_path_get =
     _libevm_contract_call_module._default_artifact_path_get;
 /* global
+     _contract_abi_auto_detect */
+const
+  _contract_abi_auto_detect =
+    _libevm_contract_call_module._contract_abi_auto_detect;
+/* global
      _evm_contract_call */
 const
   _evm_contract_call =
