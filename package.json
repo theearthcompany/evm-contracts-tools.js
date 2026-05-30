@@ -86,7 +86,7 @@
     "evm-transactions-tools":
       "^0.0.9",
     "evm-wallet.js":
-      "^0.0.44",
+      "^0.0.48",
     "libevm":
       "^0.0.26",
     "yargs":
@@ -96,7 +96,7 @@
     "evm-contracts-tools":
       "^0.0.31",
     "evm-wallet.js":
-      "^0.0.44"
+      "^0.0.48"
   },
   "type":
     "commonjs",
