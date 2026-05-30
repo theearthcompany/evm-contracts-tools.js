@@ -364,6 +364,9 @@ function
 
 function
   _cmdline_parse() {
+  let
+    _error,
+    _msg;
   quiet =
     "y";
   process.argv.forEach(
@@ -420,18 +423,23 @@ function
       }
     }
   );
+  _error =
+    false;
   if ( transaction_deployment == "" ) {
-    _msg_error(
-      "No deployment transaction specified.",
-      0);
-    quiet =
-      "n";
-    _usage(
-      1);
+    _msg =
+      "No deployment transaction specified.";
+    _error =
+      true;
   }
   if ( contract_bytecode_path == "" ) {
+    _msg =
+      "No contract bytecode path specified.";
+    _error =
+      true;
+  }
+  if ( _error ) {
     _msg_error(
-      "No contract bytecode path specified.",
+      _msg,
       0);
     quiet =
       "n";

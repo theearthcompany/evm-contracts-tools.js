@@ -1,0 +1,243 @@
+#!/usr/bin/env node
+
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+/**    ----------------------------------------------------------------------
+ *     address-check
+ *     ----------------------------------------------------------------------
+ *     Copyright ©
+ *       Pellegrino Prevete
+ *         2024, 2025, 2026
+ * 
+ *     All rights reserved
+ *     ----------------------------------------------------------------------
+ * 
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * 
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ * 
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+const
+  _libcrash =
+    require(
+      "crash-js");
+const
+  _cmdline_check =
+    _libcrash._cmdline_check;
+const
+  _error_display =
+    _libcrash._error_display;
+const
+  _msg_info =
+    _libcrash._msg_info;
+const
+  _msg_error =
+    _libcrash._msg_error;
+const
+  _printf =
+    _libcrash._printf;
+const
+  { ethers } =
+    require(
+      "ethers");
+const
+  _ethers =
+    ethers;
+const
+  _address_check =
+    _ethers.isAddress;
+const
+  _wei_to_ether =
+    _ethers.formatEther;
+const
+  _evm_transactions_tools_module =
+    require(
+      "evm-transactions-tools");
+const
+  _transaction_get =
+    _evm_transactions_tools_module._transaction_get;
+const
+  _transaction_receipt_get =
+    _evm_transactions_tools_module._transaction_receipt_get;
+const
+  _deployer_get_module =
+    require(
+      './deployer-get');
+const
+  _deployer_get =
+    _deployer_get_module._deployer_get;
+
+function
+  _global_variables() {
+  app_name =
+    "address-check";
+  /* global
+       target_address:
+         writable */
+  target_address =
+    "";
+  /* global
+       quiet:
+         writable */
+  quiet =
+    "";
+}
+
+function
+  _config_show() {
+  let
+    _line;
+  const
+    _text = [
+      "address-check configuration:",
+      `         Target address: {target_address}`,
+      ];
+  for (_line of _text)  { 
+    _msg_info(
+      _line);
+  }
+}
+
+function
+  _usage(
+    _exit) {
+  let
+    _display_fun,
+    _line,
+    _text;
+  _text = [
+    "Checks whether an address is valid.",
+    "",
+    "usage:",
+    "  address-check",
+    "    <target-address>",
+    "",
+    "args:",
+    "  <target-address>                 Address to check.",
+    "",
+    "  options:",
+    "    -v --verbose                   Extended output."
+    "    -h --help                      This help."
+  ];
+  for (_line of _text) {
+    _msg_info(
+      _line);
+  }
+  _process_exit(
+    _exit);
+}
+
+function
+  _overrides_set() {
+  true;
+}
+
+function
+  _cmdline_parse() {
+  quiet =
+    "y";
+  process.argv.forEach(
+    function (
+      _value,
+      _index,
+      _array) {
+      if ( _index == 2 ) {
+        target_address =
+          _value;
+      }
+      if ( _value == "-v" ||
+           _value == "--verbose" ) {
+        quiet =
+          "n";
+      }
+      if ( _value == "-h" ||
+           _value == "--help" ) {
+        quiet =
+          "n";
+        _usage(
+          0);
+      }
+    }
+  );
+  if ( target_address == "" ) {
+    const
+      _msg =
+        "No deployment transaction specified.";
+    _msg_error(
+      _msg,
+      0);
+    quiet =
+      "n";
+    _usage(
+      1);
+  }
+}
+async function
+  _address_check_cmdline(
+    _app_opts) {
+  let
+    _is_address,
+    _msg;
+  try {
+    _is_address = 
+      await _address_check.apply(
+        null,
+        _app_opts);
+    const
+      _return_type =
+        typeof(
+          _is_address);
+    if ( _return_type == "undefined" ) {
+      _msg =
+        "Big error.";
+      _msg_error(
+        _msg,
+        1);
+    }
+    else {
+      _msg =
+        `Address '${target_address}' is valid.'`;
+      throw _msg;
+    }
+  } catch (
+      _error) {
+    _msg_error(
+      _error,
+      1);
+  }
+}
+
+if ( _cmdline_check(
+       "bytecode-creation-get") ) {
+  _global_variables();
+  _cmdline_parse();
+  _overrides_set();
+  _config_show();
+  app_opts = [
+    wallet_seed,
+    retries_max,
+    api_key_path,
+    chain_id,
+    chain_name,
+    target_network,
+    contract_address,
+    transaction_deployment,
+    contract_bytecode_path
+  ];
+  _bytecode_creation_get_cmdline(
+    app_opts);
+}
+
+module.exports = {
+  _address_check:
+    _is_address
+};

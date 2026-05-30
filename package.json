@@ -104,6 +104,8 @@
     "evm-contracts-tools",
   "bin":
     { 
+      "ethereum-address-validate":
+        "address-check",
       "evm-contract-call":
         "evm-contract-call",
       "evm-contract-call.js":
